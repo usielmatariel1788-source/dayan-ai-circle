@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#D8461A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#131110" media="(prefers-color-scheme: dark)">
+<meta name="description" content="从会用到用好：认知 → 工具 → 应用。一年期，橙皮书资料库 + 10 个落地工具 + 群内 AI 交流。首发 ¥99，11 月 1 日起 ¥199。">
+<meta name="format-detection" content="telephone=no">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="从会用到用好 · 大炎 AI 一线认知圈">
+<meta property="og:description" content="认知 → 工具 → 应用。一年期：橙皮书资料库、10 个落地工具、群内 AI 交流。首发 ¥99 / 年。">
+<meta property="og:site_name" content="大炎 AI 一线认知圈">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="从会用到用好 · 大炎 AI 一线认知圈">
+<meta name="twitter:description" content="认知 → 工具 → 应用。一年期，首发 ¥99 / 年。">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23D8461A'/%3E%3Ctext x='32' y='46' font-size='40' font-family='serif' font-weight='700' fill='%23FFF3E8' text-anchor='middle'%3E炎%3C/text%3E%3C/svg%3E">
+<title>大炎 AI 一线认知圈 · 从会用到用好</title>
+
+<style>
+/* ============================================================
+   橙皮书 · 视觉规范
+   ground: 印刷纸 / 夜读
+   ink:    墨黑 · 橙油墨 · 钢青（用于已归档内容）
+   type:   宋体标题 + 系统黑体正文 + 等宽技术标签 + Georgia 数字
+   ============================================================ */
+
+:root {
+  --paper:      #E4DFD5;
+  --paper-2:    #D9D2C5;
+  --paper-3:    #CEC6B7;
+  --ink:        #17140F;
+  --ink-soft:   #554E43;
+  --ink-faint:  #8A8173;
+  --orange:     #D8461A;
+  --orange-2:   #B93A13;
+  --steel:      #3A5560;
+  --rule:       rgba(23, 20, 15, 0.22);
+  --rule-soft:  rgba(23, 20, 15, 0.10);
+  --overprint:  multiply;
+  --grain-op:   0.30;
+  --on-orange:  #FFF3E8;
+
+  --f-song: "Songti SC", "STSong", "SimSun", "Noto Serif CJK SC", "Source Han Serif SC", serif;
+  --f-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --f-mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --f-num:  Georgia, "Times New Roman", "Songti SC", serif;
+
+  --pad: clamp(20px, 5vw, 76px);
+  --maxw: 1240px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper:      #131110;
+    --paper-2:    #1B1815;
+    --paper-3:    #24201B;
+    --ink:        #E9E3D7;
+    --ink-soft:   #A79E8F;
+    --ink-faint:  #6E6659;
+    --orange:     #FF6A2B;
+    --orange-2:   #FF8850;
+    --steel:      #7FA7B4;
+    --rule:       rgba(233, 227, 215, 0.20);
+    --rule-soft:  rgba(233, 227, 215, 0.09);
+    --overprint:  screen;
+    --grain-op:   0.16;
+    --on-orange:  #1A0A02;
+  }
+}
+:root[data-theme="light"] {
+  --paper: #E4DFD5; --paper-2: #D9D2C5; --paper-3: #CEC6B7;
+  --ink: #17140F; --ink-soft: #554E43; --ink-faint: #8A8173;
+  --orange: #D8461A; --orange-2: #B93A13; --steel: #3A5560;
+  --rule: rgba(23,20,15,0.22); --rule-soft: rgba(23,20,15,0.10);
+  --overprint: multiply; --grain-op: 0.30; --on-orange: #FFF3E8;
+}
+:root[data-theme="dark"] {
+  --paper: #131110; --paper-2: #1B1815; --paper-3: #24201B;
+  --ink: #E9E3D7; --ink-soft: #A79E8F; --ink-faint: #6E6659;
+  --orange: #FF6A2B; --orange-2: #FF8850; --steel: #7FA7B4;
+  --rule: rgba(233,227,215,0.20); --rule-soft: rgba(233,227,215,0.09);
+  --overprint: screen; --grain-op: 0.16; --on-orange: #1A0A02;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* 纸张颗粒 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 999;
+  pointer-events: none;
+  opacity: var(--grain-op);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  mix-blend-mode: var(--overprint);
+}
+
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--pad); }
+
+/* ---------- 通用零件 ---------- */
+.tag {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.sec-no {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  color: var(--orange);
+}
+.h2 {
+  font-family: var(--f-song);
+  font-weight: 700;
+  font-size: clamp(28px, 4.4vw, 50px);
+  line-height: 1.18;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-wrap: balance;
+}
+.lede {
+  max-width: 34em;
+  color: var(--ink-soft);
+  font-size: clamp(15px, 1.35vw, 17.5px);
+  margin: 0;
+}
+.rule-t { border-top: 1px solid var(--rule); }
+
+/* ---------- 顶栏 ---------- */
+.topbar {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--orange);
+  color: var(--on-orange);
+  border-bottom: 1px solid rgba(0,0,0,0.25);
+}
+.topbar .wrap {
+  display: flex; align-items: center; gap: 16px;
+  height: 38px;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.topbar strong { font-weight: 700; }
+.topbar .spacer { flex: 1; }
+.topbar .blink {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--on-orange);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.25} }
+.topbar .hide-s { display: none; }
+@media (min-width: 720px) { .topbar .hide-s { display: inline; } }
+
+/* ---------- 封面 ---------- */
+.cover { position: relative; padding-block: clamp(56px, 9vw, 116px) clamp(48px, 7vw, 92px); }
+.cover::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    repeating-linear-gradient(to right, var(--rule-soft) 0 1px, transparent 1px 78px);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+}
+
+.cover-grid {
+  display: grid;
+  gap: clamp(32px, 5vw, 60px);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 1000px) { .cover-grid { grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); align-items: start; } }
+
+.meta-line {
+  display: flex; flex-wrap: wrap; gap: 10px 22px;
+  font-family: var(--f-mono); font-size: 11px;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+.meta-line b { color: var(--orange); font-weight: 500; }
+
+/* 套印标题 */
+.title { position: relative; margin: 0; }
+.title .layer {
+  font-family: var(--f-song);
+  font-weight: 700;
+  font-size: clamp(52px, 12.2vw, 148px);
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  display: block;
+}
+.title .plate-k { position: relative; color: var(--ink); }
+.title .plate-o {
+  position: absolute; inset: 0;
+  color: var(--orange);
+  mix-blend-mode: var(--overprint);
+  pointer-events: none;
+  transform: translate(4px, 4px);
+  animation: registration 1.5s cubic-bezier(.16,.84,.3,1) both;
+}
+@keyframes registration {
+  0%   { transform: translate(26px, 15px); opacity: 0; }
+  35%  { opacity: 1; }
+  100% { transform: translate(4px, 4px); opacity: 1; }
+}
+
+.subtitle {
+  margin: clamp(26px, 3.4vw, 40px) 0 0;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 14px;
+  font-family: var(--f-song);
+  font-size: clamp(20px, 2.9vw, 34px);
+  line-height: 1.4;
+}
+.subtitle .sep { color: var(--orange); font-family: var(--f-sans); font-size: 0.7em; }
+.subtitle em { font-style: normal; }
+
+.cover-body { margin-top: clamp(24px, 3vw, 34px); max-width: 33em; color: var(--ink-soft); }
+.cover-body p { margin: 0 0 14px; }
+.cover-body p:last-child { margin-bottom: 0; }
+.cover-body .kicker { color: var(--ink); font-weight: 600; }
+
+/* 定价卡 */
+.pricecard {
+  border: 1.5px solid var(--ink);
+  background: var(--paper-2);
+  padding: 26px 26px 22px;
+  position: relative;
+}
+.pricecard::before {
+  content: "";
+  position: absolute; inset: 6px;
+  border: 1px solid var(--rule-soft);
+  pointer-events: none;
+}
+.pricecard .lbl { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.16em; color: var(--ink-faint); text-transform: uppercase; }
+.pricecard .now {
+  display: flex; align-items: baseline; gap: 8px;
+  margin: 10px 0 2px;
+  font-family: var(--f-num);
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+.pricecard .now .cur { font-size: 26px; }
+.pricecard .now .val { font-size: clamp(58px, 8vw, 82px); line-height: 0.9; font-weight: 700; letter-spacing: -0.02em; }
+.pricecard .now .unit { font-family: var(--f-sans); font-size: 14px; color: var(--ink-soft); letter-spacing: 0.05em; }
+.pricecard .next {
+  margin-top: 14px; padding-top: 14px;
+  border-top: 1px dashed var(--rule);
+  font-size: 14px; color: var(--ink-soft);
+  display: flex; justify-content: space-between; gap: 12px; align-items: baseline;
+}
+.pricecard .next b { font-family: var(--f-num); font-size: 20px; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; margin-top: 18px; background: var(--rule); border: 1px solid var(--rule); }
+.stats div { background: var(--paper); padding: 13px 10px; text-align: center; }
+.stats .n { font-family: var(--f-num); font-size: 27px; font-weight: 700; line-height: 1; display: block; font-variant-numeric: tabular-nums; }
+.stats .t { font-size: 11px; color: var(--ink-faint); letter-spacing: 0.06em; margin-top: 5px; display: block; }
+
+/* ---------- 通用区块 ---------- */
+.sec { padding-block: clamp(56px, 8vw, 108px); }
+.sec-head { display: grid; gap: 16px; margin-bottom: clamp(34px, 4.6vw, 58px); }
+.sec-head .top { display: flex; align-items: center; gap: 14px; }
+.sec-head .top .line { flex: 1; height: 1px; background: var(--rule); }
+
+/* ---------- 三个阶段 ---------- */
+.stages { display: grid; gap: 0; border-top: 1.5px solid var(--ink); }
+.stage {
+  display: grid; gap: clamp(14px, 2.4vw, 40px);
+  grid-template-columns: 1fr;
+  padding-block: clamp(30px, 4vw, 46px);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+}
+@media (min-width: 860px) {
+  .stage { grid-template-columns: 118px minmax(0, 0.92fr) minmax(0, 1.08fr); align-items: start; }
+}
+.stage .num {
+  font-family: var(--f-song);
+  font-size: clamp(40px, 5.2vw, 62px);
+  line-height: 0.9;
+  color: var(--orange);
+  font-weight: 700;
+}
+.stage .num small { display: block; font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--ink-faint); margin-top: 10px; font-weight: 400; }
+.stage h3 { font-family: var(--f-song); font-size: clamp(24px, 3.2vw, 36px); margin: 0 0 10px; line-height: 1.25; font-weight: 700; }
+.stage .state { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--ink-faint); text-transform: uppercase; }
+.stage p { margin: 0 0 14px; color: var(--ink-soft); }
+.stage p:last-child { margin-bottom: 0; }
+.stage .out {
+  margin-top: 18px; padding: 14px 16px;
+  background: var(--paper-2);
+  border-left: 3px solid var(--orange);
+  font-size: 14.5px;
+}
+.stage .out b { display: block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.16em; color: var(--ink-faint); text-transform: uppercase; margin-bottom: 6px; font-weight: 500; }
+
+/* ---------- 权益 ---------- */
+.deliv { display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+@media (min-width: 900px) { .deliv { grid-template-columns: repeat(3, 1fr); } }
+.deliv > article { background: var(--paper); padding: clamp(24px, 3vw, 34px); display: grid; align-content: start; gap: 12px; }
+.deliv h3 { font-family: var(--f-song); font-size: 23px; margin: 0; font-weight: 700; }
+.deliv p { margin: 0; color: var(--ink-soft); font-size: 15px; }
+.deliv .idx { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.18em; color: var(--orange); }
+.deliv ul { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: 14px; color: var(--ink-soft); }
+.deliv li { padding-left: 16px; position: relative; }
+.deliv li::before { content: "—"; position: absolute; left: 0; color: var(--orange); }
+
+/* ---------- 索引表 ---------- */
+.index-list { border-top: 1.5px solid var(--ink); }
+.index-list .row {
+  display: grid; grid-template-columns: 46px 1fr auto; gap: 14px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.index-list .row .no { font-family: var(--f-mono); font-size: 11px; color: var(--ink-faint); font-variant-numeric: tabular-nums; }
+.index-list .row .nm { font-family: var(--f-song); font-size: clamp(16px, 1.8vw, 20px); font-weight: 600; line-height: 1.4; }
+.index-list .row .ty { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.12em; color: var(--ink-faint); text-transform: uppercase; white-space: nowrap; }
+.index-note { margin-top: 20px; font-size: 14px; color: var(--ink-faint); }
+
+/* ---------- 刊期表 ---------- */
+.sched { display: grid; gap: 1px; background: var(--rule); border-block: 1px solid var(--rule); }
+.sched .item {
+  background: var(--paper);
+  display: grid; grid-template-columns: 74px 1fr; gap: 16px;
+  padding: 16px 4px 16px 0;
+  align-items: baseline;
+}
+@media (min-width: 780px) { .sched .item { grid-template-columns: 74px 1fr 120px; } }
+.sched .date { font-family: var(--f-mono); font-size: 12px; color: var(--ink-faint); font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+.sched .ttl { font-size: 15.5px; line-height: 1.5; }
+.sched .ttl b { font-weight: 600; }
+.sched .by { font-size: 13px; color: var(--ink-faint); }
+@media (max-width: 779px) { .sched .by { grid-column: 2; } }
+.sched .st { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; }
+.sched .st.done { color: var(--steel); }
+.sched .st.next { color: var(--orange); font-weight: 700; }
+.sched .item.upcoming { background: var(--paper-2); }
+.sched .item.upcoming .ttl { font-weight: 600; }
+
+/* ---------- 定价修订 ---------- */
+.pricing { background: var(--orange); color: var(--on-orange); }
+.pricing .h2, .pricing .sec-no { color: var(--on-orange); }
+.pricing .sec-head .top .line { background: currentColor; opacity: 0.35; }
+.pricing .lede { color: inherit; opacity: 0.86; }
+
+.revtable { margin-top: clamp(30px, 4vw, 44px); border-top: 1.5px solid currentColor; }
+.revtable .r {
+  display: grid; grid-template-columns: 92px 1fr auto; gap: 14px;
+  align-items: baseline;
+  padding: 15px 0;
+  border-bottom: 1px solid currentColor;
+  font-variant-numeric: tabular-nums;
+}
+.revtable .r:not(.cur) { border-bottom-color: color-mix(in srgb, currentColor 28%, transparent); }
+.revtable .r .pd { font-family: var(--f-mono); font-size: 11.5px; letter-spacing: 0.1em; opacity: 0.7; }
+.revtable .r .pv { font-family: var(--f-num); font-size: 26px; font-weight: 700; }
+.revtable .r .nt { font-size: 13.5px; opacity: 0.75; text-align: right; }
+.revtable .r.past { opacity: 0.5; text-decoration-color: currentColor; }
+.revtable .r.past .pv { text-decoration: line-through; }
+.revtable .r.cur {
+  background: var(--on-orange); color: var(--orange);
+  padding-inline: 16px; margin-inline: -16px;
+  border-bottom-color: transparent;
+}
+.revtable .r.cur .pv { font-size: 40px; }
+.revtable .r.cur .pd, .revtable .r.cur .nt { opacity: 0.9; }
+.revtable .r.future .pv { font-size: 22px; opacity: 0.8; }
+
+.cta-band { margin-top: clamp(36px, 5vw, 56px); display: grid; gap: 18px; }
+@media (min-width: 820px) { .cta-band { grid-template-columns: 1fr auto; align-items: center; } }
+.cta-band p { margin: 0; font-family: var(--f-song); font-size: clamp(19px, 2.4vw, 27px); line-height: 1.45; }
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--on-orange); color: var(--orange);
+  font-family: var(--f-sans); font-weight: 700; font-size: 16px;
+  padding: 16px 30px;
+  text-decoration: none;
+  border: 1.5px solid transparent;
+  transition: transform .2s cubic-bezier(.2,.8,.3,1), box-shadow .2s;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.28);
+  white-space: nowrap;
+}
+.btn:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 rgba(0,0,0,0.28); }
+.btn:active { transform: translate(2px, 2px); box-shadow: 2px 2px 0 rgba(0,0,0,0.28); }
+.btn .arw { font-family: var(--f-mono); }
+
+/* ---------- 页脚 ---------- */
+.foot { padding-block: clamp(40px, 5vw, 64px); border-top: 1px solid var(--rule); }
+.foot .wrap { display: grid; gap: 22px; }
+@media (min-width: 780px) { .foot .wrap { grid-template-columns: 1fr auto; align-items: end; } }
+.foot .mark { font-family: var(--f-song); font-size: 22px; font-weight: 700; }
+.foot .fine { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; color: var(--ink-faint); line-height: 2; text-transform: uppercase; }
+
+/* ---------- 滚动揭示 ---------- */
+.rv { opacity: 0; transform: translateY(22px); transition: opacity .8s ease, transform .8s cubic-bezier(.16,.84,.3,1); }
+.rv.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .rv { opacity: 1; transform: none; transition: none; }
+  .title .plate-o { animation: none; transform: translate(4px, 4px); }
+  .topbar .blink { animation: none; }
+  .btn { transition: none; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <span class="blink" aria-hidden="true"></span>
+    <strong>首发 ¥99 / 年</strong>
+    <span class="hide-s">· 11 月 1 日起 ¥199 / 年</span>
+    <span class="spacer"></span>
+    <span class="hide-s">大炎 · 首发期</span>
+  </div>
+</header>
+
+<main>
+
+<!-- ══════════ 封面 ══════════ -->
+<section class="cover">
+  <div class="wrap">
+    <div class="meta-line">
+      <span>大炎 AI 一线认知圈</span>
+      <span>一年期</span>
+      <span>资料库 + 工具 + 交流</span>
+      <span><b>REV. 2026.10</b></span>
+    </div>
+
+    <div class="cover-grid">
+      <div>
+        <h1 class="title">
+          <span class="layer plate-k">从会用<br>到用好</span>
+          <span class="layer plate-o" aria-hidden="true">从会用<br>到用好</span>
+        </h1>
+
+        <p class="subtitle">
+          <em>认知</em><span class="sep">→</span><em>工具</em><span class="sep">→</span><em>应用</em>
+        </p>
+
+        <div class="cover-body">
+          <p class="kicker">每天都能看到新工具，却不一定知道怎样用到自己身上。</p>
+          <p>你可能已经会和 AI 对话，也收藏了不少教程。但遇到一个真实的工作问题，仍然需要重新找资料、试工具、辨别哪些做法真正可用。</p>
+          <p>这一年，我们把 AI 的新信息、能动手的工具和实际应用放在一起。先从一件具体的小事开始，再慢慢积累适合自己的方法。</p>
+        </div>
+      </div>
+
+      <aside>
+        <div class="pricecard">
+          <span class="lbl">首发价 · 一年</span>
+          <div class="now">
+            <span class="cur">¥</span>
+            <span class="val">99</span>
+            <span class="unit">/ 1 年</span>
+          </div>
+          <div class="next">
+            <span>11 月 1 日起</span>
+            <b>¥199</b>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div><span class="n">10</span><span class="t">份 AI 橙皮书在库</span></div>
+          <div><span class="n">15</span><span class="t">个商业应用智能体</span></div>
+          <div><span class="n">N+</span><span class="t">提示词工程</span></div>
+        </div>
+        <p class="index-note">数字是已经躺在库里的存量，不是承诺。今天付费，今天就能开始实操。</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 三个阶段 ══════════ -->
+<section class="sec rule-t" id="stages">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="top">
+        <span class="sec-no">§ 1</span>
+        <span class="line"></span>
+        <span class="tag">The Three Stages</span>
+      </div>
+      <h2 class="h2">三个阶段，从了解走向应用</h2>
+      <p class="lede">不必一次掌握所有 AI 概念。先看见有用的信息，再拿工具解决一个具体问题，最后把经验放回自己的工作场景。</p>
+    </div>
+
+    <div class="stages">
+
+      <article class="stage rv">
+        <div class="num">一<small>Stage 01</small></div>
+        <div>
+          <h3>认知</h3>
+          <span class="state">状态：看见 · 找方向</span>
+        </div>
+        <div>
+          <p>AI 的资讯很多，值得跟进的却不一定多。先建立基本判断，知道什么变化与自己的工作有关，什么只需要了解。</p>
+          <p>把零散的新鲜事放进清晰的主题里，才更容易发现适合自己尝试的方向。</p>
+          <div class="out">
+            <b>这一年在这一层给你的</b>
+            橙皮书资料库里的认知入门、提示词方法和案例拆解，以及群内持续分享的 AI 信息差。帮助你判断哪些值得上手，哪些暂时不必追。
+          </div>
+        </div>
+      </article>
+
+      <article class="stage rv">
+        <div class="num">二<small>Stage 02</small></div>
+        <div>
+          <h3>工具</h3>
+          <span class="state">状态：动手 · 可复用</span>
+        </div>
+        <div>
+          <p>找到一件具体任务，从提示词或智能体开始试。把输入、步骤和输出整理下来，下次遇到相似问题就有现成起点。</p>
+          <p>工具的价值不在于名字多新，而在于能否帮你省下重复劳动，或者把一件事做得更稳。</p>
+          <div class="out">
+            <b>这一年在这一层给你的</b>
+            一年内拟逐步交付 10 个落地工具，先从通用提示词、需求澄清、会议纪要、内容选题和知识整理等高频场景开始。每件工具附使用说明，方便你修改后用于自己的工作。
+          </div>
+        </div>
+      </article>
+
+      <article class="stage rv">
+        <div class="num">三<small>Stage 03</small></div>
+        <div>
+          <h3>应用</h3>
+          <span class="state">状态：落地 · 可积累</span>
+        </div>
+        <div>
+          <p>当工具在真实场景里用起来，就会遇到新问题。把过程、结果和踩过的坑记录下来，下一次调整会更有依据。</p>
+          <p>有人一起交流，会更容易看见自己没想到的做法。产品内容也会根据实际使用反馈持续整理。</p>
+          <div class="out">
+            <b>这一年在这一层给你的</b>
+            群内的 AI 信息差和认知交流，大炎本人每天查看并回复当日群消息。你可以分享实际应用、提出具体问题，也可以参与不定时的线下活动交流。
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 权益 ══════════ -->
+<section class="sec rule-t" id="deliverables">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="top">
+        <span class="sec-no">§ 2</span>
+        <span class="line"></span>
+        <span class="tag">What You Get</span>
+      </div>
+      <h2 class="h2">99 买到的三样东西</h2>
+      <p class="lede">一个持续更新的AI认知库，10＋逐步交付的AI落地应用工具提示词以及一个能日常交流 AI 的群。</p>
+    </div>
+
+    <div class="deliv rv">
+      <article>
+        <span class="idx">01 / 资料</span>
+        <h3>橙皮书资料库</h3>
+        <p>10 份 AI 橙皮书已经在库，围绕认知、工具、系统和商业应用整理。具体目录见下方。</p>
+        <ul>
+          <li>覆盖认知、工具和应用</li>
+          <li>围绕个人与企业场景</li>
+          <li>新内容统一归档，持续更新</li>
+        </ul>
+      </article>
+      <article>
+        <span class="idx">02 / 工具</span>
+        <h3>10 个落地工具</h3>
+        <p>一年内拟逐步交付 10 个工具，包括提示词、智能体和模板。先解决日常高频任务，再按实际反馈调整。</p>
+        <ul>
+          <li>每件附说明，可直接改用</li>
+          <li>涵盖内容、沟通与知识整理</li>
+          <li>持续更新各种 AI 落地应用工具</li>
+        </ul>
+      </article>
+      <article>
+        <span class="idx">03 / 交流</span>
+        <h3>AI 信息差 / 认知交流</h3>
+        <p>群里日常分享 AI 信息差、认知和使用经验。大炎本人每天查看，并回复当日群消息。</p>
+        <ul>
+          <li>AI 新发现和实践问题都能聊</li>
+          <li>互相分享各自用过的方法</li>
+          <li>不定时线下活动交流</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 资料库索引 ══════════ -->
+<section class="sec rule-t" id="library">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="top">
+        <span class="sec-no">§ 3</span>
+        <span class="line"></span>
+        <span class="tag">Library Index</span>
+      </div>
+      <h2 class="h2">库里现在有什么</h2>
+      <p class="lede">下面这些今天就在库里，付费后立刻可读。不是路线图，不是「即将上线」。</p>
+    </div>
+
+    <div class="index-list rv">
+      <div class="row"><span class="no">01</span><span class="nm">AI 使用能力橙皮书：从会用到用好的三个阶段</span><span class="ty">总纲</span></div>
+      <div class="row"><span class="no">02</span><span class="nm">Claude Code 橙皮书</span><span class="ty">工具</span></div>
+      <div class="row"><span class="no">03</span><span class="nm">Codex 橙皮书</span><span class="ty">工具</span></div>
+      <div class="row"><span class="no">04</span><span class="nm">五层 AI 操作系统橙皮书 · 个人版完整搭建指南</span><span class="ty">系统</span></div>
+      <div class="row"><span class="no">05</span><span class="nm">从 AI 工具用户到 AI 流程架构者 —— 用 Claude Code 重构你的业务系统</span><span class="ty">系统</span></div>
+      <div class="row"><span class="no">06</span><span class="nm">知识库橙皮书</span><span class="ty">系统</span></div>
+      <div class="row"><span class="no">07</span><span class="nm">Agent-Ready 橙皮书：怎么让你的产品 / 服务被 Agent 调用</span><span class="ty">前瞻</span></div>
+      <div class="row"><span class="no">08</span><span class="nm">企业 AI 化橙皮书</span><span class="ty">企业</span></div>
+      <div class="row"><span class="no">09</span><span class="nm">用 AI 重构你的高客单生意 · 闭环橙皮书</span><span class="ty">企业</span></div>
+      <div class="row"><span class="no">10</span><span class="nm">自媒体矩阵 AI 创作系统（橙皮书）</span><span class="ty">内容</span></div>
+    </div>
+    <p class="index-note">另有 15 个商业应用智能体与 N+ 提示词工程归档在同一个库里。</p>
+  </div>
+</section>
+
+<!-- ══════════ 落地工具 ══════════ -->
+<section class="sec rule-t" id="schedule">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="top">
+        <span class="sec-no">§ 4</span>
+        <span class="line"></span>
+        <span class="tag">Practical Tools</span>
+      </div>
+      <h2 class="h2">落地工具</h2>
+      <p class="lede">10 个常用工具，已交付 3 个、待交付 7 个。下面是首版清单，包含提示词、智能体和模板。</p>
+    </div>
+
+    <div class="sched rv">
+      <div class="item upcoming"><span class="date">工具 01</span><span class="ttl"><b>通用提示词模板库</b><br><span class="by">把需求、角色和输出格式说清楚</span></span><span class="st next">已交付</span></div>
+      <div class="item upcoming"><span class="date">工具 02</span><span class="ttl"><b>AI 需求澄清助手</b><br><span class="by">把模糊想法拆成可执行任务</span></span><span class="st next">已交付</span></div>
+      <div class="item upcoming"><span class="date">工具 03</span><span class="ttl"><b>会议纪要整理助手</b><br><span class="by">提炼结论、待办和负责人</span></span><span class="st next">已交付</span></div>
+      <div class="item"><span class="date">工具 04</span><span class="ttl">客服常见问答模板 · 整理问题，统一回复口径</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">工具 05</span><span class="ttl">内容选题助手 · 按目标用户生成选题方向</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">工具 06</span><span class="ttl">口播文案优化器 · 让表达更自然、更易懂</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">工具 07</span><span class="ttl">客户跟进记录助手 · 梳理沟通重点和下一步动作</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">工具 08</span><span class="ttl">企业知识库搭建模板 · 给资料分类、命名与检索</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">工具 09</span><span class="ttl">SOP 拆解助手 · 把重复工作整理成步骤与检查点</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">工具 10</span><span class="ttl">业务流程智能体 · 串联信息收集、处理和交付</span><span class="st done">待交付</span></div>
+      <div class="item"><span class="date">说明</span><span class="ttl">工具名称与交付顺序，将根据实际反馈调整</span><span class="st done">首版清单</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 定价修订 ══════════ -->
+<section class="sec pricing" id="pricing">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div class="top">
+        <span class="sec-no">§ 5</span>
+        <span class="line"></span>
+        <span class="tag">Price Revision</span>
+      </div>
+      <h2 class="h2">一年期价格，一目了然</h2>
+      <p class="lede">首发价 ¥99 / 年；2026 年 11 月 1 日起调整为 ¥199 / 年。10 份 AI 橙皮书、15 个商业应用智能体和 N+ 提示词工程已在库，落地工具持续交付。</p>
+    </div>
+
+    <div class="revtable rv">
+      <div class="r cur"><span class="pd">现在</span><span class="pv">¥99</span><span class="nt">首发 · 一年期</span></div>
+      <div class="r future"><span class="pd">11 月 1 日起</span><span class="pv">¥199</span><span class="nt">一年期</span></div>
+      <div class="r future"><span class="pd">服务期限</span><span class="pv">12 个月</span><span class="nt">资料 · 工具 · 交流</span></div>
+      <div class="r future"><span class="pd">交付清单</span><span class="pv">逐步开放</span><span class="nt">正式发布时说明</span></div>
+    </div>
+
+    <div class="cta-band rv">
+      <p>今天是这一年里，它最便宜的一天。</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <div class="mark">大炎 AI 一线认知圈 · 从会用到用好</div>
+      <p class="lede" style="margin-top:8px;font-size:14px;">一年期 · 橙皮书资料库 · 10 个落地工具 · 群内交流</p>
+    </div>
+    <div class="fine">
+      REV. 2026.10<br>
+      Current ¥99 / 1 year<br>
+      Next revision: 2026.11 — ¥199
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var els = document.querySelectorAll(".rv");
+  if (reduce || !("IntersectionObserver" in window)) {
+    els.forEach(function (el) { el.classList.add("in"); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.06 });
+  els.forEach(function (el, i) {
+    el.style.transitionDelay = (Math.min(i, 3) * 70) + "ms";
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
+
